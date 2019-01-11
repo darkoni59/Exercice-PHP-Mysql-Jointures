@@ -35,6 +35,28 @@ function afficheelv(){
     }
 }
  afficheelv();
+function nivelv(){
+    global $conn;
+    $sql='SELECT * FROM competences,eleves_competences where eleves_competences.competences_id=competences.id';
+  $connexion=$conn->query($sql);
+
+
+$string ="";
+while($row =$connexion->fetch_assoc()) {
+    echo $row['niveau']."<br>".$row['niveau_ae']."<br>";
+
+    $niveau = $row['niveau'];
+    if ($string!= '') {
+        $string.= ",";
+    }
+    $string.= $niveau;
+    global $string;
+
+}
+
+
+}
+nivelv();
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,35 +70,54 @@ function afficheelv(){
 </html>
 <script>
     var myConfig = {
-        "type": "radar",
-        "plot": {
-            "aspect": "area"
+        type : 'radar',
+        plot : {
+            aspect : 'area',
+            animation: {
+                effect:3,
+                sequence:1,
+                speed:700
+            }
         },
-        "scale-v": {
-            "values": "0:100:25",
-            "labels": ["", "", "", "", ""],
-            "ref-line": {
-                "line-color": "none"
+        scaleV : {
+            visible : false
+        },
+        scaleK : {
+            values : '0:10:0',
+            labels : ['sebastien html','sebastien css', 'sebastien JS','dede html','dede css','dede JS','sophie html','sophie css','sophie JS','romain html','romain css','romain JS'],
+
+            item : {
+                fontColor : '#000',
+                backgroundColor : "white",
+                borderColor : "#aeaeae",
+                borderWidth : 1,
+                padding : '5 10',
+                borderRadius : 10
             },
-            "guide": {
-                "line-style": "solid"
+            refLine : {
+                lineColor : '#c10000'
+            },
+            tick : {
+                lineColor : '#000',
+                lineWidth : 2,
+                lineStyle : 'dotted',
+                size : 20
+            },
+            guide : {
+                lineColor : "#0000",
+                lineStyle : 'solid',
+                alpha : 0.3,
+                backgroundColor : "#c5c5c5 #718eb4"
             }
         },
-        "scale-k": {
-            "values": "0:330:30",
-            "format": "%v°",
-            "aspect": "circle", //To set the chart shape to circular.
-            "guide": {
-                "line-style": "solid"
-            }
-        },
-        "series": [{
-            "values": [59, 30, 65, 34, 40, 33, 31, 90, 81, 70, 100, 28]
-        }, {
-            "values": [30, 100, 90, 99, 59, 34, 5, 3, 12, 15, 16, 75, 34]
-        }, {
-            "values": [34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 100]
-        }]
+        series : [
+            {
+                values : [<?php echo $string ?>],
+                text:'farm'
+
+            },
+
+        ]
     };
 
     zingchart.render({
