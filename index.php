@@ -35,7 +35,7 @@ function afficheelv(){
     }
 }
  afficheelv();
-function nivelv(){
+function nivelv(){ global $string;
     global $conn;
     $sql='SELECT * FROM competences,eleves_competences where eleves_competences.competences_id=competences.id';
   $connexion=$conn->query($sql);
@@ -43,14 +43,14 @@ function nivelv(){
 
 $string ="";
 while($row =$connexion->fetch_assoc()) {
-    echo $row['niveau']."<br>".$row['niveau_ae']."<br>";
+
 
     $niveau = $row['niveau'];
     if ($string!= '') {
         $string.= ",";
     }
     $string.= $niveau;
-    global $string;
+
 
 }
 
@@ -83,7 +83,7 @@ nivelv();
             visible : false
         },
         scaleK : {
-            values : '0:10:0',
+            values : '0:11:0',
             labels : ['sebastien html','sebastien css', 'sebastien JS','dede html','dede css','dede JS','sophie html','sophie css','sophie JS','romain html','romain css','romain JS'],
 
             item : {
