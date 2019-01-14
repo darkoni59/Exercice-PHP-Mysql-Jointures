@@ -8,9 +8,9 @@
 
 // Premiere ligne
 
-$username='root';
+$username='id7331118_bryanbultot';
 $servername='localhost';
-$password='';
+$password='bryanbultot';
 $dbname='eleves_information';
 
 
@@ -50,7 +50,6 @@ while($row =$connexion->fetch_assoc()) {
         $string.= ",";
     }
     $string.= $niveau;
-
 
 }
 
